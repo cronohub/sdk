@@ -5,6 +5,8 @@ github.com/cronohub/protoc v0.0.0-20190122082617-7c45af92a4e7 h1:GumMSgXDFAmqYBd
 github.com/cronohub/protoc v0.0.0-20190122082617-7c45af92a4e7/go.mod h1:3zTxiRSgaZzH3tZ/uE3kDTFxHsaE2BbAF6yT3wEZevg=
 github.com/cronohub/protoc v0.0.0-20190122102616-ef29789635cf h1:gceCfjU9zD1xsunFSZ/yVVjyX6+2u/QWknC4K9Ud03A=
 github.com/cronohub/protoc v0.0.0-20190122102616-ef29789635cf/go.mod h1:3zTxiRSgaZzH3tZ/uE3kDTFxHsaE2BbAF6yT3wEZevg=
+github.com/cronohub/protoc v1.0.1 h1:eEFY/FRsujr4SdMxoW/aoR5DeHnMuPb92hsg8n/eX5k=
+github.com/cronohub/protoc v1.0.1/go.mod h1:slIq8wNkk9gGdX/+92MnMPax8zksJaFR5g+IlPOG1zU=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
