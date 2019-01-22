@@ -3,8 +3,8 @@ package sdk
 import (
 	"context"
 
-	"github.com/chronohub/protoc/proto"
-	"github.com/hashicorp/go-plugin"
+	"github.com/cronohub/protoc/proto"
+	plugin "github.com/hashicorp/go-plugin"
 	"google.golang.org/grpc"
 )
 
@@ -14,9 +14,9 @@ import (
  *
  */
 
-// Arcive takes a locate to a file and archives it giving back a
+// Archive takes a locate to a file and archives it giving back a
 // a bool as a result of the archiving procedure.
-type Arcive interface {
+type Archive interface {
 	Execute(payload string) bool
 }
 
@@ -53,14 +53,14 @@ type GRPCArchiveClient struct{ client proto.ArchiveClient }
 
 // Execute is the GRPC implementation of the Execute function for the
 // Archive plugin definition. This will talk over GRPC.
-func (m *GRPCArchiveClient) Execute(key string) bool {
-	p, err := m.client.Execute(context.Background(), &proto.Stack{
-		Name: key,
+func (m *GRPCArchiveClient) Execute(filename string) bool {
+	p, err := m.client.Execute(context.Background(), &proto.Payload{
+		File: filename,
 	})
 	if err != nil {
 		return false
 	}
-	return p.Failed
+	return p.Success
 }
 
 // GRPCArchiveServer is the gRPC server that GRPCArchiveClient talks to.
@@ -71,8 +71,7 @@ type GRPCArchiveServer struct {
 
 // Execute is the execute function of the GRPCServer which will rely the information to the
 // underlying implementation of this interface.
-func (m *GRPCArchiveServer) Execute(ctx context.Context, req *proto.Stack) (*proto.Proceed, error) {
-	res := m.Impl.Execute(req.Name)
-	return &proto.Proceed{Failed: res}, nil
+func (m *GRPCArchiveServer) Execute(ctx context.Context, req *proto.Payload) (*proto.Status, error) {
+	res := m.Impl.Execute(req.File)
+	return &proto.Status{Success: res}, nil
 }
-
