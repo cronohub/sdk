@@ -30,6 +30,8 @@ github.com/cronohub/protoc v1.0.1 h1:eEFY/FRsujr4SdMxoW/aoR5DeHnMuPb92hsg8n/eX5k
 github.com/cronohub/protoc v1.0.1/go.mod h1:slIq8wNkk9gGdX/+92MnMPax8zksJaFR5g+IlPOG1zU=
 github.com/cronohub/protoc v1.0.2 h1:QhpebkeU6oXMoOglE//zFdLzcgqfWfACg1U9rMshBv4=
 github.com/cronohub/protoc v1.0.2/go.mod h1:slIq8wNkk9gGdX/+92MnMPax8zksJaFR5g+IlPOG1zU=
+github.com/cronohub/protoc v1.0.3 h1:81u7Zci6wWOrHm/rsWlErweo5bxuOSPw3Drk1uBa/F0=
+github.com/cronohub/protoc v1.0.3/go.mod h1:slIq8wNkk9gGdX/+92MnMPax8zksJaFR5g+IlPOG1zU=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

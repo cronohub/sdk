@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	"github.com/cronohub/protoc/proto"
+	proto "github.com/cronohub/protoc/cronoprot"
 	plugin "github.com/hashicorp/go-plugin"
 	"google.golang.org/grpc"
 )
