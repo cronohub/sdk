@@ -8,6 +8,15 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Handshake is a common handshake that is shared by plugin and host.
+var Handshake = plugin.HandshakeConfig{
+	// This isn't required when using VersionedPlugins
+	ProtocolVersion: 1,
+	MagicCookieKey:  "CRONOHUB_PLUGINS",
+	// Never ever change this.
+	MagicCookieValue: "9f4c000c-dd07-4968-a33a-a42337c5f479",
+}
+
 /*
  *
  * Plugin interface declarations.
