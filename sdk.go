@@ -4,7 +4,7 @@ import (
 	"context"
 
 	proto "github.com/cronohub/protoc/cronoprot"
-	plugin "github.com/hashicorp/go-plugin"
+	"github.com/hashicorp/go-plugin"
 	"google.golang.org/grpc"
 )
 
@@ -14,7 +14,7 @@ var Handshake = plugin.HandshakeConfig{
 	ProtocolVersion: 1,
 	MagicCookieKey:  "CRONOHUB_PLUGINS",
 	// Never ever change this.
-	MagicCookieValue: "9f4c000c-dd07-4968-a33a-a42337c5f479",
+	MagicCookieValue: "ce118ec2-6c69-48a2-a7c5-02787052ec95",
 }
 
 /*
@@ -26,7 +26,7 @@ var Handshake = plugin.HandshakeConfig{
 // Archive takes a locate to a file and archives it giving back a
 // a bool as a result of the archiving procedure.
 type Archive interface {
-	Execute(payload string) bool
+	Execute(payload string) (bool, error)
 }
 
 /*
@@ -44,6 +44,11 @@ type ArchiveGRPCPlugin struct {
 	Impl Archive
 }
 
+// GRPCArchiveClient is an implementation of Archive that talks over RPC.
+type GRPCArchiveClient struct {
+	client proto.ArchiveClient
+}
+
 // GRPCServer is the grpc server implementation which calls the
 // protoc generated code to register it.
 func (p *ArchiveGRPCPlugin) GRPCServer(broker *plugin.GRPCBroker, s *grpc.Server) error {
@@ -57,19 +62,16 @@ func (p *ArchiveGRPCPlugin) GRPCClient(ctx context.Context, broker *plugin.GRPCB
 	return &GRPCArchiveClient{client: proto.NewArchiveClient(c)}, nil
 }
 
-// GRPCArchiveClient is an implementation of Archive that talks over RPC.
-type GRPCArchiveClient struct{ client proto.ArchiveClient }
-
 // Execute is the GRPC implementation of the Execute function for the
 // Archive plugin definition. This will talk over GRPC.
-func (m *GRPCArchiveClient) Execute(filename string) bool {
+func (m *GRPCArchiveClient) Execute(filename string) (bool, error) {
 	p, err := m.client.Execute(context.Background(), &proto.Payload{
 		File: filename,
 	})
 	if err != nil {
-		return false
+		return false, err
 	}
-	return p.Success
+	return p.Success, nil
 }
 
 // GRPCArchiveServer is the gRPC server that GRPCArchiveClient talks to.
@@ -81,6 +83,6 @@ type GRPCArchiveServer struct {
 // Execute is the execute function of the GRPCServer which will rely the information to the
 // underlying implementation of this interface.
 func (m *GRPCArchiveServer) Execute(ctx context.Context, req *proto.Payload) (*proto.Status, error) {
-	res := m.Impl.Execute(req.File)
-	return &proto.Status{Success: res}, nil
+	res, err := m.Impl.Execute(req.File)
+	return &proto.Status{Success: res}, err
 }
